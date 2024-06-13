@@ -1,6 +1,6 @@
 
 class Ship{
-    constructor(length=null, timesHit=null, sunk="no"){
+    constructor(length=null, timesHit=null, sunk=false){
         this.length = length;
         this.timesHit = timesHit;
         this.sunk = sunk;
@@ -9,66 +9,74 @@ class Ship{
         return this.timesHit++;
     }
     isSunk(){
-        if (this.len == this.timesHit) return this.sunk = "yes";
+        if (this.length == this.timesHit) return this.sunk = true;
     }
 }
 
-const Gameboard = () => {
-    const destroyer = new Ship(length = 2);
-    const submarine = new Ship(length = 3);
-    const cruiser = new Ship(length = 3);
-    const battleShip = new Ship(length = 4);
-    const carrier = new Ship(length = 5);
+class Gameboard {
 
-    
-    let rows = 10, columns = 10;
-    const coords = [];
-    for(let i =0; i <rows; i++){
-        coords[i] = [];
-        for(let j = 0; j < columns; j++){
-            coords[i][j] = null;
+    constructor(){
+       this.ships = [];
+       this.coords =[];
+
+       let rows = 10, columns = 10;
+        //const coords = [];
+        for(let i =0; i <rows; i++){
+            this.coords[i] = [];
+            for(let j = 0; j < columns; j++){
+                this.coords[i][j] = null;
+            }
         }
     }
-
-    coords[1][3]=1;coords[1][4]=1;//destroyer
-    coords[0][0]=2;coords[1][0]=2;coords[2][0]=2; // submarine
-    coords[8][7]=3;coords[8][8]=3;coords[8][9]=3; // cruiser
-    coords[2][9]=4;coords[3][9]=4;coords[4][9]=4;coords[5][9]=4;// battleShip
-    coords[9][2]=5;coords[9][3]=5;coords[9][4]=5;coords[9][5]=5;coords[9][6]=5;//carrier
     
-    const receiveAttack = (x,y) => {
+    placeShip(ship, cord, direcTion){
+        
+        for(let i=1; i < ship.length; i++){
+            if(direcTion == "vertical"){
+                this.coords[ cord[0] ][ cord[1] ] = ship.length - 1;
+                this.coords[ cord[0] + i][ cord[1] ] = ship.length -1;
+            }
+            else if(direcTion == "horizontal"){
+                this.coords[ cord[0] ][ cord[1] ] = ship.length - 1;
+                this.coords[ cord[0] ][ cord[1] + i] = ship.length - 1;
+            }
+        }
+
+        this.ships.push(ship);
+        return this.ships;
+    }
+
+    receiveAttack(x,y){
         //const missed =[];
-        if(coords[x][y] == null){
-            coords[x][y] = 0;
+        if(this.coords[x][y] == null){
+            this.coords[x][y] = "M";
             //missed
         }
         else{
-            if(coords[x][y] == 1) {
-                coords[x][y] = "X";
-                destroyer.hit();
+            for (let ship of this.ships){
+                if(this.coords[x][y] == ship.length - 1) {
+                    this.coords[x][y] = "X";
+                    ship.hit();
+                    ship.isSunk();
+                } 
             }
-            if(coords[x][y] == 2) {
-                coords[x][y] = "X";
-                submarine.hit();
-            }
-            if(coords[x][y] == 3) {
-                coords[x][y] = "X";
-                cruiser.hit();
-            }
-            if(coords[x][y] == 4) {
-                coords[x][y] = "X";
-                battleShip.hit();
-            }
-            if(coords[x][y] == 5) {
-                coords[x][y] = "X";
-                carrier.hit();
-            }
-            
         }
-    };
-    receiveAttack();
 
-};
+        return this.coords;
+       /*  if(destroyer.isSunk() && submarine.isSunk() && cruiser.isSunk() && battleShip.isSunk() && carrier.isSunk()){
+            return "All ships have been sunk";
+        } */
+    }
+
+    allSank(){
+        let count=0;
+        for (let ship of this.ships){
+            if(ship.sunk == true) count++;
+        }
+        if (count == this.ships.length) return "All ships have been sunk";
+    }
+
+}
 
 export {Ship, Gameboard};
 
@@ -78,3 +86,6 @@ console.log(ship1);
 ship1.isSunk();
 console.log(ship1.isSunk());
 console.log(ship1); */
+
+
+
