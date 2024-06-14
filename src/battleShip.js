@@ -78,7 +78,18 @@ class Gameboard {
 
 }
 
-export {Ship, Gameboard};
+class Player{
+    constructor(realPlayer, comPlayer){
+        this.realPlayer = realPlayer;
+        this.comPlayer = comPlayer;
+    }
+    players(){
+        this.realPlayer = new Gameboard();
+        this.comPlayer  = new Gameboard();
+    }
+}
+
+export {Ship, Gameboard, Player};
 
 /* const ship1 = new Ship(length = 3);
 ship1.hit(); ship1.hit(); ship1.hit();

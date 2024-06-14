@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Battle Ship</title>
+    </head>
+    <body>
+
+        <div class="mainContainer">
+
+            <div style="text-align: center; font-size: 40px; font-weight:bolder;"
+             class="gameName">Battleship</div>
+
+            <div class="closeButtns">
+                <button class="addPlayers">Add Players Names</button>
+                <button class="clean">Restart Game</button>
+            </div>
+            <p></p>
+
+            <div class="boards" style="display: flex; flex-direction: row;">
+                <div class="board1">
+
+                </div>
+
+                <div class="board2">
+
+                </div>
+            </div>
+    
+        </div>
+
+        <div id="foRm">
+            <form id="myForm" action="" method="get" style="display: none;">
+                
+                <label for="pl1">Player's name:  </label>
+                <input type="text" id="pl1" name = "Player" required>
+            
+                <button type="submit" id="aDD">Add</button>
+            </form>
+        </div>
+        
+    </body>
+</html>

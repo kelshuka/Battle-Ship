@@ -1,0 +1,35 @@
+
+/* body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+} */
+
+
+.container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center; 
+    gap: 3px;
+    min-height: 90vh;
+    width: 1000px;
+   /*  box-sizing: border-box;  */
+} 
+
+
+.contents {
+    display: flex;
+    flex-direction: column;
+    /* flex-grow: 1;
+    flex-shrink: 0; */
+    outline: 0.1px solid green;
+    justify-content: space-around;
+    background-color: rgb(221, 204, 105);
+    border-radius: 5%;
+    min-height: 3vh; 
+    width: 120px;
+}
+
+

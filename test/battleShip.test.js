@@ -1,5 +1,5 @@
 
-import { Ship, Gameboard } from "./battleShip";
+import { Ship, Gameboard } from "../src/battleShip";
 
 describe('description of ship', () => {
     test('ship is accurate', () => {
@@ -67,7 +67,7 @@ describe.only('Gameboard', () =>{
         expect(AllShips.allSank()).toMatch("All ships have been sunk");
     });
 
-    test.skip('a', () => {
+    test.skip('all array of gameboard', () => {
         expect(AllShips.coords).toEqual([0,0,null]);
     });
 });
