@@ -7,7 +7,7 @@ const board2 = document.querySelector('.board2'); */
 import { Ship, Gameboard, Player } from "../battleShip";
 
 
-function gridStructure(board, num =10) {
+function gridStructure(board,player, num =10) {
     //let gSize = 640 / num;
     let gSize = 400 / num;
     const AllShips = new Gameboard(); 
@@ -24,21 +24,20 @@ function gridStructure(board, num =10) {
     
     for (let i=0;i<num ; i++ ) {
         const content = document.createElement('div');
-        //content.classList.add('content');
+        content.classList.add(`content${player}`);
         content.innerText = i;
 
         for (let j=0;j< num ; j++) {
             const contents = document.createElement('div');
+            contents.classList.add(`contents${player}`);
             contents.classList.add('contents');
             contents.id = `${j},${i}`;
-            //contents.append(arr[j][i]);
 
             const span = document.createElement('span');
             span.append(arr[j][i]);
             span.classList.add('styNone');
 
             contents.append(span);
-            //contents.innerText = (i * num) + j;
             contents.style.height = `${gSize}px`;
             contents.style.width = `${gSize}px`;
             content.appendChild(contents);
@@ -47,64 +46,79 @@ function gridStructure(board, num =10) {
         board.classList.add('container');
     }
 
-    const contents = document.querySelectorAll('.contents');
+    const contents = document.querySelectorAll(`.contents${player}`);
+    const cont1 = document.querySelectorAll('.content1 .contents1');
+    console.log(cont1.textContent);
+    console.log(contents.textContent);
 
-    contents.forEach(contents => {
-        contents.addEventListener('click', (e) => {
+    if(player == 2){ 
+        contents.forEach(contents => {
+            contents.addEventListener('click', (e) => {
 
-            let ind = e.target.id;
-            if(contents.textContent === "null"){
-                contents.style.backgroundColor = 'blue';
-                AllShips.receiveAttack(ind[0],ind[2]);
-                console.log(arr);
-            }else if(contents.textContent !== "null"){
-                contents.style.backgroundColor = 'red';
-                AllShips.receiveAttack(ind[0],ind[2]);// Hit 
-                console.log(arr);
+                let ind = e.target.id;
+                if(contents.textContent === "null"){
+                    contents.style.backgroundColor = 'blue';
+                    AllShips.receiveAttack(ind[0],ind[2]);
+                    console.log(arr);
+                }else if(contents.textContent !== "null"){
+                    contents.style.backgroundColor = 'red';
+                    AllShips.receiveAttack(ind[0],ind[2]);// Hit 
+                    
+                    if( AllShips.allSank()== "All ships have been sunk" ){
+                        console.log("Ships sank");
+                        return;
+                    }
+                    console.log(arr);
+                }  
 
-            }
-            
+                
+                //console.log(cont1.textContent);
+                //compPlay(arr, cont1);
+                
+            });
         });
-    });
+    }
    
-    contents.forEach(contents => {
-        if(contents.textContent !== "null"){
-            contents.style.backgroundColor = 'grey';
-        }
-    });
+    if(player == 1){
+        contents.forEach(contents => {
+            if(contents.textContent !== "null"){
+                contents.style.backgroundColor = 'grey';
+            }
+        });
+    }
 
 
 }
+
+function getComputerChoice(choices) {
+    //const choices = ["Rock","Paper","Scissors"];
+    const randomChosen = choices[Math.floor(Math.random()*choices.length)];
+    const randomNumber = randomChosen[Math.floor(Math.random()*randomChosen.length)]
+    return randomNumber;
+}
+
+function compPlay(arr, contents){
+            
+    let indComp = getComputerChoice(arr); 
+    console.log(indComp);
+    if(contents.id == indComp ){
+        if(contents.textContent === "null"){
+            contents.style.backgroundColor = 'blue';
+            AllShips.receiveAttack(indComp[0],indComp[2]);
+            console.log(arr);
+        }else if(contents.textContent !== "null"){
+            contents.style.backgroundColor = 'red';
+            AllShips.receiveAttack(indComp[0],indComp[2]);// Hit 
+            
+            if( AllShips.allSank()== "All ships have been sunk" ){
+                console.log("Ships sank");
+                return;
+            }
+            console.log(arr);
+        }  
+    }
+}
+
 
 
 export {gridStructure};
-
-/* function gridStructure(board, num =10) {
-    //let gSize = 640 / num;
-    let gSize = 400 / num;
-    for (let i=0;i<num ; i++ ) {
-        const content = document.createElement('div');
-        //content.classList.add('content');
-        content.innerText = i;
-
-        for (let j=0;j< num ; j++) {
-            const contents = document.createElement('div');
-            contents.classList.add('contents');
-            contents.id = `${j},${i}`
-            //contents.innerText = (i * num) + j;
-            contents.style.height = `${gSize}px`;
-            contents.style.width = `${gSize}px`;
-            content.appendChild(contents);
-        }
-        board.appendChild(content);
-        board.classList.add('container');
-    }
-
-    const contents = document.querySelectorAll('.contents');
-    contents.forEach(contents => {
-        contents.addEventListener('click', function(){
-            contents.style.backgroundColor = 'grey';
-        })
-    });
-}
- */
