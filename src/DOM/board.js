@@ -66,11 +66,7 @@ class gridStructure{
     }
 
     player2(board){
-        /* this.play2.placeShip(this.ship12, [1,3], "horizontal");
-        this.play2.placeShip(this.ship22, [0,0], "vertical");
-        this.play2.placeShip(this.ship32, [8,6], "horizontal");
-        this.play2.placeShip(this.ship42, [2,9], "vertical"); */
-
+        
         // randomly places computer ships
         const comShipNo = placeComputerShips();
         console.log(comShipNo);
@@ -115,43 +111,49 @@ class gridStructure{
 
         contents.forEach(contents => {
             contents.addEventListener('click', (e) => {
+
+                /* if((contents.style.backgroundColor = 'blue') || (contents.style.backgroundColor = 'red') ){
+
+                } */
     
-                let ind = e.target.id;
-                if(contents.textContent === "null"){
-                    contents.style.backgroundColor = 'blue';
-                    this.play2.receiveAttack(ind[0],ind[2]);
-                    console.log(this.arr2);
-                }else if(contents.textContent !== "null"){
-                    contents.style.backgroundColor = 'red';
-                    this.play2.receiveAttack(ind[0],ind[2]);
-                    
-                    if( this.play2.allSank()=== "All ships have been sunk" ){
-                        console.log("Ships sank, player 1 wins");
-                        winner.textContent = "Ships sank, player 1 wins!!";
-                        return;
+                if( (contents.style.backgroundColor = 'blue') || (contents.style.backgroundColor = 'red') ){ 
+                    let ind = e.target.id;
+                    if(contents.textContent === "null"){
+                        contents.style.backgroundColor = 'blue';
+                        this.play2.receiveAttack(ind[0],ind[2]);
+                        console.log(this.arr2);
+                    }else if(contents.textContent !== "null"){
+                        contents.style.backgroundColor = 'red';
+                        this.play2.receiveAttack(ind[0],ind[2]);
+                        
+                        if( this.play2.allSank()=== "All ships have been sunk" ){
+                            console.log("Ships sank, player 1 wins");
+                            winner.textContent = "Ships sank, player 1 wins!!";
+                            return;
+                        }
                     }
-                }
+                    
+                    let indComp = getComputerChoice(this.arr1, "X", "M"); 
                 
-                let indComp = getComputerChoice(this.arr1, "X", "M"); 
-            
-                console.log(indComp[0],indComp[1],indComp[2]);
+                    console.log(indComp[0],indComp[1],indComp[2]);
 
-                const cont1 = document.getElementById(`${indComp[0]},${indComp[1]},1`);
+                    const cont1 = document.getElementById(`${indComp[0]},${indComp[1]},1`);
 
-                if(cont1.textContent === "null"){
-                    cont1.style.backgroundColor = 'blue';
-                    this.play1.receiveAttack(indComp[0],indComp[1]);
-                    console.log(this.arr1);
-                }else if(cont1.textContent !== "null" ){
-                    cont1.style.backgroundColor = 'red';
-                    this.play1.receiveAttack(indComp[0],indComp[1]);
-                    
-                    if( this.play1.allSank()=== "All ships have been sunk" ){
-                        console.log("Ships sank, player2 wins");
-                        winner.textContent = "Ships sank, computer wins!!";
-                        return;
-                    }
-                }  
+                    if(cont1.textContent === "null"){
+                        cont1.style.backgroundColor = 'blue';
+                        this.play1.receiveAttack(indComp[0],indComp[1]);
+                        console.log(this.arr1);
+                    }else if(cont1.textContent !== "null" ){
+                        cont1.style.backgroundColor = 'red';
+                        this.play1.receiveAttack(indComp[0],indComp[1]);
+                        
+                        if( this.play1.allSank()=== "All ships have been sunk" ){
+                            console.log("Ships sank, player2 wins");
+                            winner.textContent = "Ships sank, computer wins!!";
+                            return;
+                        }
+                    }  
+                }
             
                      
             });
@@ -212,5 +214,6 @@ function placeComputerShips(){
 
 
 export {gridStructure};
+
 
 
