@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Battle Ship</title>
+    <script defer src="main.js"></script></head>
+    <body>
+
+        <div class="mainContainer">
+
+            <div style="text-align: center; font-size: 40px; font-weight:bolder;color: white;"
+             class="gameName">Battleship</div>
+
+            <div class="closeButtns">
+                <button class="addPlayers" style="display: none;">Change your ships positions</button>
+                <button class="clean" style="background-color: rgb(155, 211, 211);">Restart Game</button>
+            </div>
+            <div style="text-align: center; height: 2px; color: rgb(64, 64, 170);" class="winner"></div>
+            <p></p>
+
+            <div class="boards" style="display: flex; flex-direction: row;">
+                <div class="board1">
+
+                </div>
+
+                <div class="board2">
+
+                </div>
+            </div>
+    
+        </div>
+
+        <div id="foRm">
+            <form id="myForm" action="" method="get" style="display: none;">
+                
+                <label for="pl1">Player's name:  </label>
+                <input type="text" id="pl1" name = "Player" required>
+            
+                <button type="submit" id="aDD">Add</button>
+            </form>
+        </div>
+        
+    </body>
+</html>
